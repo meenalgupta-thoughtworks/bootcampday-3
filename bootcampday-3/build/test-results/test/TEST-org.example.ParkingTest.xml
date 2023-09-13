@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.ParkingTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2023-09-13T11:24:33" hostname="Meenals-MacBook-Pro.local" time="0.02">
+<testsuite name="org.example.ParkingTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2023-09-13T11:43:46" hostname="Meenals-MacBook-Pro.local" time="0.018">
   <properties/>
-  <testcase name="shouldReturnTrueIfCarIsUnParked()" classname="org.example.ParkingTest" time="0.011"/>
+  <testcase name="shouldReturnTrueIfCarIsUnParked()" classname="org.example.ParkingTest" time="0.008"/>
   <testcase name="shouldThrowExceptionIfCapacityIsNegative()" classname="org.example.ParkingTest" time="0.001"/>
   <testcase name="shouldReturnFalseIfSlotsAreNotAvailable()" classname="org.example.ParkingTest" time="0.001"/>
   <testcase name="shouldReturnFalseIfCarIsNotParked()" classname="org.example.ParkingTest" time="0.001"/>
-  <testcase name="shouldReturnTrueWhenPark1Car()" classname="org.example.ParkingTest" time="0.0"/>
-  <testcase name="shouldReturnTrueWhenPark2Car()" classname="org.example.ParkingTest" time="0.001"/>
-  <testcase name="shouldReturnFalseWhenSameCarIsParked()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnTrueWhenPark1Car()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnTrueWhenPark2Car()" classname="org.example.ParkingTest" time="0.0"/>
+  <testcase name="shouldReturnFalseForOwnerIfParkingIsNotFull()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnFalseWhenSameCarIsParked()" classname="org.example.ParkingTest" time="0.0"/>
   <testcase name="shouldReturnTrueIfCarIsParked()" classname="org.example.ParkingTest" time="0.0"/>
   <testcase name="shouldNotifyOwnerIfParkingIsFull()" classname="org.example.ParkingTest" time="0.0"/>
+  <testcase name="shouldNotifyTrafficCopIfParkingIsFull()" classname="org.example.ParkingTest" time="0.001"/>
   <testcase name="shouldReturnFalseIfCarNotParked()" classname="org.example.ParkingTest" time="0.001"/>
-  <system-out><![CDATA[Parking is full . . .
-Parking is full . . .
-Parking is full . . .
-Parking is full . . .
-Parking is full . . .
-Parking is full . . .
-]]></system-out>
+  <testcase name="shouldReturnFalseForTrafficCopIfParkingIsNotFull()" classname="org.example.ParkingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

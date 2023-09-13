@@ -10,14 +10,13 @@ public class Parking {
 
     private int parkingSlotsCounter = 0;
     private final int CAPACITY;
-    private final Owner owner;
+    private final List<Subscriber> subscribers = new ArrayList<>();
 
-    public Parking(int capacity, Owner owner) {
+    public Parking(int capacity) {
         if (capacity <= 0) {
             throw new InvalidCapacityException("Capacity should be a greater than 0.");
         }
         CAPACITY = capacity;
-        this.owner = owner;
     }
 
     private List<Parkable> parkedVehicles = new ArrayList<>();
@@ -30,10 +29,14 @@ public class Parking {
         if (this.isParkingAvailable() && !isCarParked(vehicle)) {
             parkedVehicles.add(vehicle);
             parkingSlotsCounter++;
-            if (!this.isParkingAvailable()) owner.notifyWhenParkingIsFull();
+            if (!this.isParkingAvailable()) this.notifySubscribers();
         } else {
             throw new ParkingSlotFullException("Parking Slots are full");
         }
+    }
+
+    private void notifySubscribers() {
+        this.subscribers.forEach(Subscriber::notifyWhenParkingIsFull);
     }
 
     public Boolean isCarParked(Parkable vehicle) {
@@ -47,5 +50,16 @@ public class Parking {
             return true;
         }
         return false;
+    }
+
+    public void addSubscriber(Subscriber subscriber) {
+        if (!subscribers.contains(subscriber)) {
+            subscribers.add(subscriber);
+        }
+    }
+    public void removeSubscriber(Subscriber subscriber) {
+        if (!subscribers.contains(subscriber)) {
+            subscribers.remove(subscriber);
+        }
     }
 }

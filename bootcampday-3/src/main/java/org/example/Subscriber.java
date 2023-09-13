@@ -1,5 +1,5 @@
 package org.example;
 
-public interface Owner {
+public interface Subscriber {
      void notifyWhenParkingIsFull();
 }

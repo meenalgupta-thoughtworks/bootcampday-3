@@ -10,8 +10,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnTrueWhenPark1Car() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         parking.park(car1);
         Boolean isParked = parking.isCarParked(car1);
@@ -20,8 +20,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnTrueWhenPark2Car() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(2, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(2);
         Car car1 = new Car();
         Car car2 = new Car();
         parking.park(car1);
@@ -32,8 +32,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnFalseIfSlotsAreNotAvailable() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         Car car2 = new Car();
         parking.park(car1);
@@ -42,8 +42,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnTrueIfCarIsParked() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         parking.park(car1);
         Boolean isParked = parking.isCarParked(car1);
@@ -52,8 +52,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnFalseIfCarIsNotParked() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         Boolean isParked = parking.isCarParked(car1);
         assertFalse(isParked);
@@ -61,8 +61,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnTrueIfCarIsUnParked() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         parking.park(car1);
         Boolean isUnParked = parking.unPark(car1);
@@ -71,8 +71,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnFalseIfCarNotParked() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         Boolean isUnParked = parking.unPark(car1);
         assertFalse(isUnParked);
@@ -80,8 +80,8 @@ class ParkingTest {
 
     @Test
     public void shouldReturnFalseWhenSameCarIsParked() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(2, owner1);
+        Subscriber subscriber1 = new Owner();
+        Parking parking = new Parking(2);
         Car car1 = new Car();
         parking.park(car1);
         assertThrows(ParkingSlotFullException.class, () -> parking.park(car1));
@@ -89,16 +89,45 @@ class ParkingTest {
 
     @Test
     public void shouldThrowExceptionIfCapacityIsNegative() {
-        Owner owner1 = new Owner1();
-        assertThrows(InvalidCapacityException.class, () -> new Parking(-1, owner1));
+        assertThrows(InvalidCapacityException.class, () -> new Parking(-1));
     }
 
     @Test
     public void shouldNotifyOwnerIfParkingIsFull() {
-        Owner owner1 = new Owner1();
-        Parking parking = new Parking(1, owner1);
-
+        Parking parking = new Parking(1);
+        Owner owner = new Owner();
         Car car1 = new Car();
+        parking.addSubscriber(owner);
         parking.park(car1);
+        assertTrue(owner.isParkingFull());
     }
+
+    @Test
+    public void shouldNotifyTrafficCopIfParkingIsFull() {
+        Parking parking = new Parking(1);
+        TrafficCop trafficCop = new TrafficCop();
+        Car car1 = new Car();
+        parking.addSubscriber(trafficCop);
+        parking.park(car1);
+        assertTrue(trafficCop.isParkingFull());
+    }
+    @Test
+    public void shouldReturnFalseForOwnerIfParkingIsNotFull() {
+        Parking parking = new Parking(2);
+        Owner owner = new Owner();
+        Car car1 = new Car();
+        parking.addSubscriber(owner);
+        parking.park(car1);
+        assertFalse(owner.isParkingFull());
+    }
+    @Test
+    public void shouldReturnFalseForTrafficCopIfParkingIsNotFull() {
+        Parking parking = new Parking(2);
+        TrafficCop trafficCop = new TrafficCop();
+        Car car1 = new Car();
+        parking.addSubscriber(trafficCop);
+        parking.park(car1);
+        assertFalse(trafficCop.isParkingFull());
+    }
+
 }
