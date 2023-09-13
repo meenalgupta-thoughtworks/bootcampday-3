@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.ParkingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-13T06:51:41" hostname="Meenals-MacBook-Pro.local" time="0.009">
+<testsuite name="org.example.ParkingTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-09-13T09:39:51" hostname="Meenals-MacBook-Pro.local" time="0.02">
   <properties/>
-  <testcase name="shouldThrowExceptionIfCapacityIsNegative()" classname="org.example.ParkingTest" time="0.009"/>
+  <testcase name="shouldReturnTrueIfCarIsUnParked()" classname="org.example.ParkingTest" time="0.01"/>
+  <testcase name="shouldThrowExceptionIfCapacityIsNegative()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnFalseIfSlotsAreNotAvailable()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnFalseIfCarIsNotParked()" classname="org.example.ParkingTest" time="0.0"/>
+  <testcase name="shouldReturnTrueWhenPark1Car()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnTrueWhenPark2Car()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnFalseWhenSameCarIsParked()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnTrueIfCarIsParked()" classname="org.example.ParkingTest" time="0.001"/>
+  <testcase name="shouldReturnFalseIfCarNotParked()" classname="org.example.ParkingTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

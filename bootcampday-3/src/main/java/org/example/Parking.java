@@ -17,28 +17,28 @@ public class Parking {
         CAPACITY = capacity;
     }
 
-    private List<Car> parkedVehicles = new ArrayList<>();
+    private List<Parkable> parkedVehicles = new ArrayList<>();
 
     private Boolean isParkingAvailable() {
         return CAPACITY - parkingSlotsCounter > 0;
     }
 
-    public Boolean park(Car car) {
-        if (this.isParkingAvailable()) {
-            parkedVehicles.add(car);
+    public Boolean park(Parkable vehicle) {
+        if (this.isParkingAvailable() && !isCarParked(vehicle)) {
+            parkedVehicles.add(vehicle);
             parkingSlotsCounter++;
             return true;
         }
         return false;
     }
 
-    public Boolean isCarParked(Car car) {
-        return parkedVehicles.contains(car);
+    public Boolean isCarParked(Parkable vehicle) {
+        return parkedVehicles.contains(vehicle);
     }
 
-    public Boolean unPark(Car car) {
-        if (parkedVehicles.contains(car)) {
-            parkedVehicles.remove(car);
+    public Boolean unPark(Parkable vehicle) {
+        if (parkedVehicles.contains(vehicle)) {
+            parkedVehicles.remove(vehicle);
             parkingSlotsCounter--;
             return true;
         }

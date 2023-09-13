@@ -8,15 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParkingTest {
 
     @Test
-    public void shouldPark1Car() {
-        Parking parking = new Parking(50);
+    public void shouldReturnTrueWhenPark1Car() {
+        Parking parking = new Parking(1);
         Car car1 = new Car();
         Boolean isParked = parking.park(car1);
         assertTrue(isParked);
     }
 
     @Test
-    public void shouldPark2Car() {
+    public void shouldReturnTrueWhenPark2Car() {
         Parking parking = new Parking(2);
         Car car1 = new Car();
         Car car2 = new Car();
@@ -67,6 +67,14 @@ class ParkingTest {
         Car car1 = new Car();
         Boolean isUnParked = parking.unPark(car1);
         assertFalse(isUnParked);
+    }
+
+    @Test
+    public void shouldReturnFalseWhenSameCarIsParked() {
+        Parking parking = new Parking(2);
+        Car car1 = new Car();
+        parking.park(car1);
+        assertFalse(parking.park(car1));
     }
 
     @Test
