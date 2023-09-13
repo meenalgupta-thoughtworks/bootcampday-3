@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.exception.InvalidCapacityException;
+import org.example.exception.ParkingSlotFullException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +10,14 @@ public class Parking {
 
     private int parkingSlotsCounter = 0;
     private final int CAPACITY;
+    private final Owner owner;
 
-    public Parking(int capacity) {
+    public Parking(int capacity, Owner owner) {
         if (capacity <= 0) {
             throw new InvalidCapacityException("Capacity should be a greater than 0.");
         }
         CAPACITY = capacity;
+        this.owner = owner;
     }
 
     private List<Parkable> parkedVehicles = new ArrayList<>();
@@ -23,13 +26,14 @@ public class Parking {
         return CAPACITY - parkingSlotsCounter > 0;
     }
 
-    public Boolean park(Parkable vehicle) {
+    public void park(Parkable vehicle) {
         if (this.isParkingAvailable() && !isCarParked(vehicle)) {
             parkedVehicles.add(vehicle);
             parkingSlotsCounter++;
-            return true;
+            if (!this.isParkingAvailable()) owner.notifyWhenParkingIsFull();
+        } else {
+            throw new ParkingSlotFullException("Parking Slots are full");
         }
-        return false;
     }
 
     public Boolean isCarParked(Parkable vehicle) {
@@ -44,5 +48,4 @@ public class Parking {
         }
         return false;
     }
-
 }
