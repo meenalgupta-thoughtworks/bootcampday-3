@@ -8,6 +8,11 @@ public class Owner implements Subscriber {
         parkingFull = true;
     }
 
+    @Override
+    public void notifyWhenParkingIsAvailable() {
+        parkingFull = false;
+    }
+
     public Boolean isParkingFull() {
         return parkingFull;
     }

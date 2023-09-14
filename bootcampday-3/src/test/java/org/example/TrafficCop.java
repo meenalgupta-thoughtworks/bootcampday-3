@@ -10,4 +10,8 @@ public class TrafficCop implements Subscriber {
     public Boolean isParkingFull() {
         return parkingFull;
     }
+    @Override
+    public void notifyWhenParkingIsAvailable() {
+        parkingFull = false;
+    }
 }

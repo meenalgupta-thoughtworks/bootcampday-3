@@ -130,4 +130,32 @@ class ParkingTest {
         assertFalse(trafficCop.isParkingFull());
     }
 
+    @Test
+    public void shouldReturnTrueToOwnerWhenParkingIsAvailable() {
+        Parking parking = new Parking(1);
+        Owner owner = new Owner();
+        Car car1 = new Car();
+
+        parking.addSubscriber(owner);
+        parking.park(car1);
+        assertTrue(owner.isParkingFull());
+
+        parking.unPark(car1);
+        assertFalse(owner.isParkingFull());
+    }
+
+    @Test
+    public void shouldReturnTrueToTrafficCopWhenParkingIsAvailable() {
+        Parking parking = new Parking(2);
+        TrafficCop trafficCop = new TrafficCop();
+        Car car1 = new Car();
+
+        parking.addSubscriber(trafficCop);
+        parking.park(car1);
+        assertTrue(trafficCop.isParkingFull());
+
+        parking.unPark(car1);
+        assertFalse(trafficCop.isParkingFull());
+    }
+
 }

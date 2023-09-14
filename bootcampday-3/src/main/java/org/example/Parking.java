@@ -29,14 +29,18 @@ public class Parking {
         if (this.isParkingAvailable() && !isCarParked(vehicle)) {
             parkedVehicles.add(vehicle);
             parkingSlotsCounter++;
-            if (!this.isParkingAvailable()) this.notifySubscribers();
+            if (!this.isParkingAvailable()) this.notifySubscribers(true);
         } else {
             throw new ParkingSlotFullException("Parking Slots are full");
         }
     }
 
-    private void notifySubscribers() {
-        this.subscribers.forEach(Subscriber::notifyWhenParkingIsFull);
+    private void notifySubscribers(Boolean parkingFull) {
+        if (parkingFull) {
+            this.subscribers.forEach(Subscriber::notifyWhenParkingIsFull);
+        } else {
+            this.subscribers.forEach(Subscriber::notifyWhenParkingIsAvailable);
+        }
     }
 
     public Boolean isCarParked(Parkable vehicle) {
@@ -45,6 +49,7 @@ public class Parking {
 
     public Boolean unPark(Parkable vehicle) {
         if (parkedVehicles.contains(vehicle)) {
+            if (!this.isParkingAvailable()) this.notifySubscribers(false);
             parkedVehicles.remove(vehicle);
             parkingSlotsCounter--;
             return true;
@@ -57,6 +62,7 @@ public class Parking {
             subscribers.add(subscriber);
         }
     }
+
     public void removeSubscriber(Subscriber subscriber) {
         if (!subscribers.contains(subscriber)) {
             subscribers.remove(subscriber);
